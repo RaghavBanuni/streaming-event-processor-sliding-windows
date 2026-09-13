@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "streaming-event-processor-sliding-windows"
+version = "1.0.0"
+description = "Event-time stream processing from scratch: watermarks, tumbling/sliding/session windows, pane decomposition, allowed lateness, Space-Saving heavy hitters, checkpoint-restore"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Raghav Banuni" }]
+keywords = ["stream-processing", "event-time", "watermarks", "sliding-windows", "space-saving"]
+classifiers = [
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.10",
+  "Topic :: System :: Distributed Computing",
+]
+# Nothing at runtime. Flink and Beam are the right answer in production; the semantics they implement are
+# the point here, and a library call hides them.
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+streamproc-demo = "streamproc.cli:main"
+
+[tool.setuptools]
+packages = ["streamproc"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["error"]
